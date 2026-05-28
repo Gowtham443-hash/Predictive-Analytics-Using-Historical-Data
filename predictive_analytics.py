@@ -2,33 +2,32 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 
-# Load historical data
+
 df = pd.read_csv("historical_data.csv")
 
-# Data preprocessing
+
 df.dropna(inplace=True)
 
-# Features and target
+
 X = df[["Year"]]
 y = df["Sales"]
 
-# Train regression model
+
 model = LinearRegression()
 model.fit(X, y)
 
-# Predict future sales
 future_years = pd.DataFrame({
     "Year": [2025, 2026, 2027, 2028]
 })
 
 predictions = model.predict(future_years)
 
-# Print predictions
+
 print("Future Predictions:")
 for year, value in zip(future_years["Year"], predictions):
     print(f"{year}: {value:.2f}")
 
-# Visualization
+
 plt.scatter(df["Year"], df["Sales"], label="Historical Data")
 plt.plot(future_years["Year"], predictions)
 
